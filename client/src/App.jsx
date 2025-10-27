@@ -10,7 +10,7 @@ export default function App() {
       const res = await axios.post(
         "https://ehc-snap.onrender.com/snap",
         { url },
-        { responseType: "blob" } // 👈 খুবই গুরুত্বপূর্ণ
+        { responseType: "blob" } //
       );
 
       const blob = new Blob([res.data], { type: "image/png" });
