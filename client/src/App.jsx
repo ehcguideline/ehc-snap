@@ -8,7 +8,7 @@ export default function App() {
   const handleSnap = async () => {
     try {
       const res = await axios.post(
-        "http://ehc-snap.onrender.com/snap",
+        "https://ehc-snap.onrender.com/snap",
         { url },
         { responseType: "blob" } // 👈 খুবই গুরুত্বপূর্ণ
       );
