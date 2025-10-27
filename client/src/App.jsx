@@ -7,9 +7,9 @@ export default function App() {
 
   const handleSnap = async () => {
     try {
-      const res = await axios.post("http://localhost:3000/snap", { url }, { responseType: "arraybuffer" });
-      const blob = new Blob([res.data], { type: "image/png" });
-      setImg(URL.createObjectURL(blob));
+      const res = await axios.post("https://ehc-snap.onrender.com/snap", { url });
+const blob = new Blob([res.data], { type: "image/png" });
+setImg(URL.createObjectURL(blob));
     } catch (err) {
       alert("Failed: " + err.message);
     }
