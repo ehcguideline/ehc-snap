@@ -7,9 +7,14 @@ export default function App() {
 
   const handleSnap = async () => {
     try {
-      const res = await axios.post("https://ehc-snap.onrender.com/snap", { url });
-const blob = new Blob([res.data], { type: "image/png" });
-setImg(URL.createObjectURL(blob));
+      const res = await axios.post(
+        "https://ehc-snap.onrender.com/snap",
+        { url },
+        { responseType: "blob" } // 👈 খুবই গুরুত্বপূর্ণ
+      );
+
+      const blob = new Blob([res.data], { type: "image/png" });
+      setImg(URL.createObjectURL(blob));
     } catch (err) {
       alert("Failed: " + err.message);
     }
