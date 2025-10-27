@@ -2,12 +2,20 @@ const express = require("express");
 const cors = require("cors");
 const puppeteer = require("puppeteer");
 const app = express();
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 app.use(express.json());
 
 app.post("/snap", async (req, res) => {
   const { url } = req.body;
   if (!url) return res.status(400).json({ error: "URL required" });
+
   try {
     const browser = await puppeteer.launch({
       headless: true,
@@ -15,8 +23,10 @@ app.post("/snap", async (req, res) => {
     });
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: "networkidle2" });
+
     const buffer = await page.screenshot({ fullPage: true });
     await browser.close();
+
     res.set("Content-Type", "image/png");
     res.send(buffer);
   } catch (err) {
